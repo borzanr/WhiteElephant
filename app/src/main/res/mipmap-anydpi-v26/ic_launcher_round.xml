@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Primeiro plano em PNG (mipmap-*/ic_launcher_foreground.png): a arte do
+    elefante mago veio do Higgsfield (GPT Image 2.5, opção 2, 21/10/2026), com
+    fonte em playstore/art/icon-art.png. O desenho ocupa 55dp dos 108dp, o que
+    mantém a quina do presente dentro do raio de 36dp da máscara redonda.
+
+    Sem camada monocromática: a silhueta da arte viraria um borrão sem detalhe.
+    Com isso, os ícones temáticos do Android 13+ mostram o ícone colorido.
+-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+</adaptive-icon>

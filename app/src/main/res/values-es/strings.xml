@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Espanhol neutro, com "tú": o público é sobretudo o hispânico dos EUA, que conhece
+    a brincadeira como White Elephant. Nada de "vosotros".
+
+    O nome do app NÃO é "Intercambio de Regalos": no México isso é o amigo secreto
+    comum (Trends, 20/10/2026: pico 100, contra 3 dos termos com roubo), e o app
+    competiria com o nosso próprio Amigo Secreto.
+-->
+<resources>
+    <string name="app_name">White Elephant</string>
+
+    <string name="common_back">Atrás</string>
+    <string name="common_more">Más opciones</string>
+    <string name="common_cancel">Cancelar</string>
+    <string name="common_ok">Aceptar</string>
+
+    <string name="menu_privacy_options">Opciones de privacidad</string>
+    <string name="menu_privacy_policy">Política de privacidad</string>
+    <string name="menu_language">Idioma</string>
+    <string name="language_system">Idioma del sistema</string>
+
+    <!-- Preparação: a festa e o convite -->
+    <string name="setup_party_title">La fiesta</string>
+    <string name="setup_event_label">Nombre de la fiesta (opcional)</string>
+    <string name="setup_event_hint">p. ej. Posada de la oficina</string>
+    <string name="setup_date">Fecha</string>
+    <string name="setup_time">Hora</string>
+    <string name="setup_invite">Enviar invitación</string>
+    <string name="setup_invite_hint">Un enlace para el grupo con la fecha, el monto y las reglas de la noche — para que nadie discuta los robos en la fiesta.</string>
+
+    <string name="invite_default_event">Intercambio de regalos</string>
+    <string name="invite_message">🎁 %1$s — %2$s. Monto, reglas y cómo se juega: %3$s</string>
+    <string name="invite_message_no_date">🎁 %1$s. Monto, reglas y cómo se juega: %2$s</string>
+    <string name="invite_chooser">Enviar invitación</string>
+    <string name="invite_whatsapp">WhatsApp</string>
+    <string name="invite_sms">SMS</string>
+    <string name="invite_copy">Copiar invitación</string>
+    <string name="invite_other">Otras apps</string>
+    <string name="invite_copied">Invitación copiada — pégala en el grupo</string>
+
+    <!-- Preparação: na hora -->
+    <string name="setup_game_title">En el juego</string>
+    <string name="setup_game_hint">Opcional: agrega a los jugadores, sortea el orden y la app lleva la cuenta de los robos.</string>
+
+    <string name="setup_budget_label">Monto del regalo (opcional)</string>
+    <string name="setup_budget_hint">p. ej. $300</string>
+    <string name="setup_change_rules">Cambiar reglas</string>
+    <string name="setup_rules_default">Reglas clásicas</string>
+    <string name="setup_rules_custom">Reglas propias de esta noche</string>
+    <string name="setup_rules_reset">Volver a las reglas clásicas</string>
+    <plurals name="setup_players">
+        <item quantity="one">%1$d jugador</item>
+        <item quantity="many">%1$d jugadores</item>
+        <item quantity="other">%1$d jugadores</item>
+    </plurals>
+    <string name="setup_players_empty">Jugadores</string>
+    <string name="setup_add_hint">Agrega un nombre o pega la lista completa</string>
+    <string name="setup_add_supporting">Separa los nombres con comas o pon uno por línea</string>
+    <string name="setup_add">Agregar</string>
+    <string name="setup_remove">Quitar a %1$s</string>
+    <string name="setup_needs_more">Agrega al menos %1$d jugadores para empezar.</string>
+    <string name="setup_draw_order">Sortear el orden</string>
+    <string name="setup_resume">Juego en curso — toca para seguir</string>
+    <string name="setup_last_results">Último juego — mira quién se llevó qué</string>
+    <string name="setup_resume_progress">%1$d de %2$d regalos abiertos</string>
+
+    <!-- As três regras variáveis -->
+    <string name="rule_freeze">El regalo se congela al %1$dº robo</string>
+    <string name="rule_freeze_body">Quien roba un regalo por tercera vez se lo queda para siempre.</string>
+    <string name="rule_no_steal_back">No se roba de vuelta enseguida</string>
+    <string name="rule_no_steal_back_body">Un regalo robado en esta ronda no se puede volver a robar hasta que alguien abra uno nuevo.</string>
+    <string name="rule_final_swap">Cambio final para quien empezó</string>
+    <string name="rule_final_swap_body">Al final, quien abrió primero puede cambiar con cualquiera. Así ser el primero no es una desventaja.</string>
+
+    <!-- Ordem -->
+    <string name="order_suspense">Sorteando el orden…</string>
+    <string name="order_title">Orden del juego</string>
+    <string name="order_start">Empezar — %1$s va primero</string>
+    <string name="order_last_is_best">%1$s juega al final — el mejor lugar: ve todos los regalos antes de elegir.</string>
+
+    <!-- Partida -->
+    <string name="play_round">Regalo %1$d de %2$d</string>
+    <string name="play_final_swap_title">Cambio final</string>
+    <string name="play_undo">Deshacer</string>
+    <string name="play_turn_label">TU TURNO</string>
+    <string name="play_turn_hint">Abre un regalo nuevo o roba uno de la lista.</string>
+    <string name="play_stolen_label">TE ROBARON EL REGALO</string>
+    <string name="play_stolen_hint">Abre un regalo nuevo o roba otro.</string>
+    <string name="play_final_swap_label">ÚLTIMA OPORTUNIDAD</string>
+    <string name="play_final_swap_hint">Cambia tu regalo por el de cualquiera, o quédatelo.</string>
+    <string name="play_next_up">Sigue: %1$s</string>
+    <string name="play_budget">Monto: %1$s</string>
+    <string name="play_open">Abrir un regalo nuevo</string>
+    <string name="play_keep">Quedarme con el mío</string>
+    <string name="play_gifts_opened">Regalos abiertos</string>
+    <string name="play_with">lo tiene %1$s</string>
+    <string name="play_steal">Robar</string>
+    <string name="play_swap">Cambiar</string>
+    <string name="play_frozen">Congelado</string>
+    <string name="play_stolen_this_round">Recién robado</string>
+    <string name="play_steals">Robado %1$d×</string>
+    <string name="play_discard">Terminar el juego</string>
+    <string name="play_discard_title">¿Terminar este juego?</string>
+    <string name="play_discard_body">Se olvidarán los regalos abiertos hasta ahora. La lista de jugadores se queda.</string>
+
+    <string name="gift_untitled">Regalo %1$d</string>
+
+    <!-- Resumo -->
+    <string name="summary_title">Quién se lleva qué</string>
+    <string name="summary_most_wanted">EL MÁS DISPUTADO</string>
+    <string name="summary_most_wanted_body">Robado %1$d× — se lo llevó %2$s.</string>
+    <string name="summary_totals">Regalos: %1$d · Robos: %2$d</string>
+    <string name="summary_done">Listo</string>
+    <string name="summary_play_again">Jugar otra vez con otro orden</string>
+
+    <!-- Regras -->
+    <string name="rules_title">Cómo se juega</string>
+    <string name="rules_tonight">Las reglas de esta noche</string>
+    <string name="rules_tonight_freeze_on">Un regalo se congela al %1$dº robo.</string>
+    <string name="rules_tonight_freeze_off">Sin límite: cualquier regalo se puede robar siempre.</string>
+    <string name="rules_tonight_steal_back_off">No se vale robar de vuelta un regalo que te acaban de quitar.</string>
+    <string name="rules_tonight_steal_back_on">Se vale robar de vuelta enseguida.</string>
+    <string name="rules_tonight_final_on">Quien abrió primero tiene un cambio final.</string>
+    <string name="rules_tonight_final_off">Sin cambio final: el juego termina con el último regalo.</string>
+    <string name="rules_bring_title">Antes de la fiesta</string>
+    <string name="rules_bring_body">Cada persona lleva un regalo envuelto dentro del monto. Los regalos de broma son parte de la diversión. Todos van a una pila en el centro.</string>
+    <string name="rules_order_title">El orden</string>
+    <string name="rules_order_body">La app sortea el orden. Ir al final es el mejor lugar: para entonces todos los regalos están a la vista.</string>
+    <string name="rules_turn_title">En tu turno</string>
+    <string name="rules_turn_body">Abre un regalo envuelto de la pila o roba uno que alguien ya abrió. Tu turno termina cuando abres un regalo.</string>
+    <string name="rules_stolen_title">Cuando te roban el regalo</string>
+    <string name="rules_stolen_body">Juegas otra vez enseguida: abres un regalo nuevo o robas otro. La ronda sigue hasta que alguien abre un regalo de la pila.</string>
+    <string name="rules_names_title">White Elephant, Dirty Santa…</string>
+    <string name="rules_names_body">El mismo juego con otros nombres. En inglés se llama White Elephant, Dirty Santa o Yankee Swap; en español, intercambio de regalos con robo o amigo invisible ladrón.</string>
+</resources>

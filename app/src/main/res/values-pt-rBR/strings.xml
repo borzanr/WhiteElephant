@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amigo Ladrão</string>
+
+    <string name="common_back">Voltar</string>
+    <string name="common_more">Mais opções</string>
+    <string name="common_cancel">Cancelar</string>
+    <string name="common_ok">OK</string>
+
+    <string name="menu_privacy_options">Opções de privacidade</string>
+    <string name="menu_privacy_policy">Política de privacidade</string>
+    <string name="menu_language">Idioma</string>
+    <string name="language_system">Idioma do sistema</string>
+
+    <!-- Preparação: a festa e o convite -->
+    <string name="setup_party_title">A festa</string>
+    <string name="setup_event_label">Nome da festa (opcional)</string>
+    <string name="setup_event_hint">ex.: Confraternização da firma</string>
+    <string name="setup_date">Data</string>
+    <string name="setup_time">Hora</string>
+    <string name="setup_invite">Enviar convite</string>
+    <string name="setup_invite_hint">Um link para o grupo com data, valor e as regras da noite — para ninguém discutir roubo na hora da festa.</string>
+
+    <string name="invite_default_event">Amigo ladrão</string>
+    <string name="invite_message">🎁 %1$s — %2$s. Valor, regras e como funciona: %3$s</string>
+    <string name="invite_message_no_date">🎁 %1$s. Valor, regras e como funciona: %2$s</string>
+    <string name="invite_chooser">Enviar convite</string>
+    <string name="invite_whatsapp">WhatsApp</string>
+    <string name="invite_sms">SMS</string>
+    <string name="invite_copy">Copiar convite</string>
+    <string name="invite_other">Outros apps</string>
+    <string name="invite_copied">Convite copiado — cole no grupo</string>
+
+    <!-- Preparação: na hora -->
+    <string name="setup_game_title">Na hora da brincadeira</string>
+    <string name="setup_game_hint">Opcional: coloque os nomes, sorteie a ordem e o app acompanha os roubos.</string>
+
+    <string name="setup_budget_label">Valor do presente (opcional)</string>
+    <string name="setup_budget_hint">ex.: R$ 50</string>
+    <string name="setup_change_rules">Mudar regras</string>
+    <string name="setup_rules_default">Regras clássicas</string>
+    <string name="setup_rules_custom">Regras próprias desta noite</string>
+    <string name="setup_rules_reset">Voltar às regras clássicas</string>
+    <plurals name="setup_players">
+        <item quantity="one">%1$d pessoa</item>
+        <item quantity="many">%1$d pessoas</item>
+        <item quantity="other">%1$d pessoas</item>
+    </plurals>
+    <string name="setup_players_empty">Pessoas</string>
+    <string name="setup_add_hint">Adicione um nome ou cole a lista inteira</string>
+    <string name="setup_add_supporting">Separe os nomes por vírgula ou coloque um por linha</string>
+    <string name="setup_add">Adicionar</string>
+    <string name="setup_remove">Remover %1$s</string>
+    <string name="setup_needs_more">Adicione pelo menos %1$d pessoas para começar.</string>
+    <string name="setup_draw_order">Sortear a ordem</string>
+    <string name="setup_resume">Partida em andamento — toque para continuar</string>
+    <string name="setup_last_results">Última partida — veja quem levou o quê</string>
+    <string name="setup_resume_progress">%1$d de %2$d presentes abertos</string>
+
+    <!-- As três regras variáveis -->
+    <string name="rule_freeze">Presente congela no %1$dº roubo</string>
+    <string name="rule_freeze_body">Quem rouba um presente pela terceira vez fica com ele de vez.</string>
+    <string name="rule_no_steal_back">Sem roubar de volta na hora</string>
+    <string name="rule_no_steal_back_body">Um presente roubado nesta rodada não pode ser roubado de novo até alguém abrir um presente novo.</string>
+    <string name="rule_final_swap">Troca final para quem começou</string>
+    <string name="rule_final_swap_body">No fim, quem abriu primeiro pode trocar com qualquer um. Deixa justo ser o primeiro.</string>
+
+    <!-- Ordem -->
+    <string name="order_suspense">Sorteando a ordem…</string>
+    <string name="order_title">Ordem de escolha</string>
+    <string name="order_start">Começar — %1$s abre primeiro</string>
+    <string name="order_last_is_best">%1$s joga por último — a melhor posição: vê todos os presentes antes de escolher.</string>
+
+    <!-- Partida -->
+    <string name="play_round">Presente %1$d de %2$d</string>
+    <string name="play_final_swap_title">Troca final</string>
+    <string name="play_undo">Desfazer</string>
+    <string name="play_turn_label">SUA VEZ</string>
+    <string name="play_turn_hint">Abra um presente novo ou roube um da lista.</string>
+    <string name="play_stolen_label">ROUBARAM SEU PRESENTE</string>
+    <string name="play_stolen_hint">Abra um presente novo ou roube outro.</string>
+    <string name="play_final_swap_label">ÚLTIMA CHANCE</string>
+    <string name="play_final_swap_hint">Troque seu presente com o de qualquer um, ou fique com ele.</string>
+    <string name="play_next_up">Depois: %1$s</string>
+    <string name="play_budget">Valor: %1$s</string>
+    <string name="play_open">Abrir um presente novo</string>
+    <string name="play_keep">Ficar com o meu</string>
+    <string name="play_gifts_opened">Presentes abertos</string>
+    <string name="play_with">com %1$s</string>
+    <string name="play_steal">Roubar</string>
+    <string name="play_swap">Trocar</string>
+    <string name="play_frozen">Congelado</string>
+    <string name="play_stolen_this_round">Acabou de ser roubado</string>
+    <string name="play_steals">Roubado %1$d×</string>
+    <string name="play_discard">Encerrar partida</string>
+    <string name="play_discard_title">Encerrar esta partida?</string>
+    <string name="play_discard_body">Os presentes abertos até agora serão esquecidos. A lista de pessoas continua.</string>
+
+    <string name="gift_untitled">Presente %1$d</string>
+
+
+    <!-- Resumo -->
+    <string name="summary_title">Quem levou o quê</string>
+    <string name="summary_most_wanted">O MAIS DISPUTADO</string>
+    <string name="summary_most_wanted_body">Roubado %1$d× — ficou com %2$s.</string>
+    <string name="summary_totals">Presentes: %1$d · Roubos: %2$d</string>
+    <string name="summary_done">Concluir</string>
+    <string name="summary_play_again">Jogar de novo com outra ordem</string>
+
+    <!-- Regras -->
+    <string name="rules_title">Como jogar</string>
+    <string name="rules_tonight">As regras desta noite</string>
+    <string name="rules_tonight_freeze_on">Um presente congela no %1$dº roubo.</string>
+    <string name="rules_tonight_freeze_off">Sem limite: qualquer presente sempre pode ser roubado.</string>
+    <string name="rules_tonight_steal_back_off">Não vale roubar de volta um presente que acabou de ser roubado.</string>
+    <string name="rules_tonight_steal_back_on">Vale roubar de volta na hora.</string>
+    <string name="rules_tonight_final_on">Quem abriu primeiro tem uma troca final.</string>
+    <string name="rules_tonight_final_off">Sem troca final: a partida acaba no último presente.</string>
+    <string name="rules_bring_title">Antes da festa</string>
+    <string name="rules_bring_body">Cada pessoa leva um presente embrulhado dentro do valor combinado. Presente de zoeira faz parte. Todos vão para uma pilha no meio.</string>
+    <string name="rules_order_title">A ordem</string>
+    <string name="rules_order_body">O app sorteia a ordem. Ser o último é a melhor posição: a essa altura todos os presentes estão na mesa.</string>
+    <string name="rules_turn_title">Na sua vez</string>
+    <string name="rules_turn_body">Abra um presente embrulhado da pilha ou roube um que alguém já abriu. Sua vez acaba quando você abre um presente.</string>
+    <string name="rules_stolen_title">Quando roubam o seu</string>
+    <string name="rules_stolen_body">Você joga de novo na hora: abre um presente novo ou rouba outro. A rodada continua até alguém abrir um presente da pilha.</string>
+    <string name="rules_names_title">Amigo da onça, Dirty Santa…</string>
+    <string name="rules_names_body">Mesma brincadeira, nomes diferentes. Nos EUA é White Elephant, Dirty Santa ou Yankee Swap; aqui também chamam de amigo secreto ladrão.</string>
+</resources>

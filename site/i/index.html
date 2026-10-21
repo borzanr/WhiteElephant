@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--
+  Página do convite. Os dados chegam no fragmento da URL (#...), que o navegador
+  nunca envia ao servidor: este HTML é igual para todo mundo e a leitura
+  acontece inteira no aparelho de quem abriu.
+
+  Regras desta página:
+  - Nenhuma requisição externa. Nem fonte, nem analytics, nem imagem de CDN.
+  - Nada vindo do link entra via innerHTML: nome da festa e valor são texto
+    digitado por pessoas, e só são inseridos com textContent.
+  - O formato do link é o de app/.../share/InviteLink.kt (base64url de um JSON
+    com as chaves v, e, d, t, b, f, n, s, l). Mudar as chaves aqui quebra os
+    convites já enviados.
+  - O botão do Google Agenda é a única saída de dados, e só acontece se a pessoa
+    tocar nele: leva nome, data e valor para o Google criar o evento.
+-->
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#140E20">
+<title>🎁 White Elephant</title>
+<!-- A prévia do WhatsApp busca a URL sem o fragmento: estas tags são genéricas. -->
+<meta property="og:title" content="🎁 You're invited · Convite · Invitación">
+<meta property="og:description" content="Date, budget and the rules. · Data, valor e regras. · Fecha, monto y reglas.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #140E20;
+    --surface: #1E1630;
+    --surface-2: #2A2042;
+    --line: #3D3157;
+    --gold: #E0B354;
+    --amethyst: #7C5BC7;
+    --bottle: #5FC48A;
+    --text: #F2E8D5;
+    --text-soft: #A99BC0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    background:
+      radial-gradient(120% 50% at 50% 0%, #173D2C 0%, transparent 60%),
+      var(--ink);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: max(28px, env(safe-area-inset-top)) 16px max(36px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  [hidden] { display: none !important; }
+
+  .hero { text-align: center; padding: 8px 0 4px; }
+  .hero svg { width: 120px; height: auto; display: block; margin: 0 auto 12px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero svg { animation: bob 2.6s ease-in-out infinite; }
+  }
+  @keyframes bob { 50% { transform: translateY(-5px) rotate(-2deg); } }
+  .eyebrow { margin: 0; color: var(--bottle); font-weight: 600; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+  h1 { margin: 6px 0 0; font-size: clamp(28px, 8vw, 36px); line-height: 1.15; overflow-wrap: anywhere; }
+  .when { margin: 14px 0 0; font-size: 20px; font-weight: 700; color: var(--gold); }
+  .when .time { display: block; font-size: 17px; color: var(--text); font-weight: 600; }
+  .pill {
+    display: inline-block; margin-top: 12px; padding: 6px 14px; border-radius: 999px;
+    background: var(--surface-2); border: 1px solid var(--line); font-weight: 600; overflow-wrap: anywhere;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 0 20px; border-radius: 999px; border: 0;
+    font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+  }
+  .button.primary { background: var(--gold); color: var(--ink); }
+  .button.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  .button:focus-visible, a:focus-visible { outline: 3px solid var(--bottle); outline-offset: 3px; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 16px 18px; }
+  .card h2 { margin: 0 0 10px; font-size: 16px; }
+  .card ol, .card ul { margin: 0; padding-left: 20px; color: var(--text-soft); }
+  .card li { margin: 6px 0; }
+  .card li strong { color: var(--text); }
+  .card p { margin: 0; color: var(--text-soft); }
+  .rules li::marker { color: var(--bottle); }
+  .more { display: inline-block; margin-top: 12px; color: var(--bottle); font-weight: 600; }
+
+  .promo { background: linear-gradient(160deg, var(--surface-2), var(--surface)); text-align: center; }
+  .promo strong { display: block; margin-bottom: 4px; }
+  .promo p { margin-bottom: 12px; }
+
+  .error { text-align: center; }
+  .error h1 { margin-top: 24px; }
+  .error p { color: var(--text-soft); }
+</style>
+</head>
+<body>
+<main>
+  <section id="invite" hidden>
+    <div class="hero">
+      <!-- O presente do ícone, com a fita verde-garrafa do app. -->
+      <svg viewBox="0 0 200 190" aria-hidden="true">
+        <rect x="22" y="78" width="156" height="104" rx="12" fill="#7C5BC7"/>
+        <rect x="22" y="140" width="156" height="42" rx="12" fill="#000" fill-opacity=".2"/>
+        <rect x="88" y="78" width="24" height="104" fill="#5FC48A"/>
+        <rect x="12" y="54" width="176" height="34" rx="10" fill="#8D6BD6"/>
+        <rect x="88" y="54" width="24" height="34" fill="#5FC48A"/>
+        <path d="M100 54 C 70 10, 30 30, 58 50 Z" fill="#E0B354"/>
+        <path d="M100 54 C 130 10, 170 30, 142 50 Z" fill="#E0B354"/>
+        <circle cx="100" cy="52" r="9" fill="#B8872F"/>
+      </svg>
+      <p class="eyebrow" id="eyebrow"></p>
+      <h1 id="event"></h1>
+      <p class="when" id="when" hidden><span id="date"></span><span class="time" id="time" hidden></span></p>
+      <span class="pill" id="budget" hidden></span>
+    </div>
+
+    <div class="actions" id="calendar" hidden>
+      <a class="button primary" id="gcal" target="_blank" rel="noopener noreferrer"></a>
+      <button class="button secondary" id="ics" type="button"></button>
+    </div>
+
+    <div class="card">
+      <h2 id="how-title"></h2>
+      <ol id="how"></ol>
+    </div>
+
+    <div class="card">
+      <h2 id="rules-title"></h2>
+      <ul class="rules" id="rules"></ul>
+      <a class="more" id="more"></a>
+    </div>
+
+    <div class="card promo">
+      <strong id="promo-title"></strong>
+      <p id="promo-body"></p>
+      <a class="button primary" id="promo-link" rel="noopener"></a>
+    </div>
+  </section>
+
+  <section id="error" class="error" hidden>
+    <h1 id="error-title"></h1>
+    <p id="error-body"></p>
+    <a class="more" id="error-more"></a>
+  </section>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const PLAY_URL = "https://play.google.com/store/apps/details?id=com.borzanti.whiteelephant";
+  const MAX_STEALS = 3; // Game.MAX_STEALS no app
+
+  const STRINGS = {
+    en: {
+      locale: "en-US",
+      eyebrow: "You're invited",
+      defaultEvent: "White Elephant gift exchange",
+      budget: (b) => `Gift budget: ${b}`,
+      gcal: "Add to Google Calendar",
+      ics: "Other calendar",
+      howTitle: "How it works",
+      how: [
+        "Bring one wrapped gift within the budget. Funny gifts are welcome.",
+        "Everyone gets a random turn. On your turn, open a new gift from the pile or steal one that's already open.",
+        "If your gift gets stolen, you go again right away. Going last is the best spot.",
+      ],
+      rulesTitle: "Our rules",
+      freezeOn: `A gift is frozen after it's stolen ${MAX_STEALS} times.`,
+      freezeOff: "No steal limit: any gift can be stolen at any time.",
+      stealBackOff: "No stealing back a gift that was just taken from you.",
+      stealBackOn: "Stealing back right away is allowed.",
+      finalOn: "At the end, whoever went first gets one last chance to swap.",
+      finalOff: "The game ends when the last gift is opened.",
+      more: "Full White Elephant rules →",
+      moreUrl: "/",
+      promoTitle: "Hosting your own?",
+      promoBody: "Free app: send the invite, draw the order and track every steal. No signup.",
+      promoCta: "Get it on Google Play",
+      errorTitle: "This invite didn't open",
+      errorBody: "The link may have been cut off when it was copied. Ask the host to send it again.",
+      icsFile: "white-elephant.ics",
+      pageTitle: "🎁 White Elephant",
+    },
+    pt: {
+      locale: "pt-BR",
+      eyebrow: "Convite",
+      defaultEvent: "Amigo ladrão",
+      budget: (b) => `Valor do presente: ${b}`,
+      gcal: "Adicionar ao Google Agenda",
+      ics: "Outra agenda",
+      howTitle: "Como funciona",
+      how: [
+        "Leve um presente embrulhado dentro do valor. Presente de zoeira é bem-vindo.",
+        "A ordem é sorteada. Na sua vez, abra um presente novo da pilha ou roube um que já foi aberto.",
+        "Se roubarem o seu, você joga de novo na hora. Ser o último é a melhor posição.",
+      ],
+      rulesTitle: "Nossas regras",
+      freezeOn: `O presente congela depois de ser roubado ${MAX_STEALS} vezes.`,
+      freezeOff: "Sem limite: qualquer presente pode ser roubado a qualquer momento.",
+      stealBackOff: "Não vale roubar de volta o presente que acabaram de tirar de você.",
+      stealBackOn: "Vale roubar de volta na hora.",
+      finalOn: "No fim, quem jogou primeiro tem uma última chance de trocar.",
+      finalOff: "A brincadeira acaba quando o último presente é aberto.",
+      more: "Todas as regras do amigo ladrão →",
+      moreUrl: "/regras/",
+      promoTitle: "Vai organizar o seu?",
+      promoBody: "App grátis: manda o convite, sorteia a ordem e acompanha cada roubo. Sem cadastro.",
+      promoCta: "Baixar no Google Play",
+      errorTitle: "Este convite não abriu",
+      errorBody: "O link pode ter sido cortado ao copiar. Peça para quem organiza enviar de novo.",
+      icsFile: "amigo-ladrao.ics",
+      pageTitle: "🎁 Amigo Ladrão",
+    },
+    es: {
+      locale: "es",
+      eyebrow: "Invitación",
+      defaultEvent: "Intercambio de regalos",
+      budget: (b) => `Monto del regalo: ${b}`,
+      gcal: "Agregar a Google Calendar",
+      ics: "Otro calendario",
+      howTitle: "Cómo se juega",
+      how: [
+        "Lleva un regalo envuelto dentro del monto. Los regalos de broma son bienvenidos.",
+        "El orden se sortea. En tu turno, abre un regalo nuevo de la pila o roba uno que ya se abrió.",
+        "Si te roban el regalo, juegas otra vez enseguida. Ir al final es el mejor lugar.",
+      ],
+      rulesTitle: "Nuestras reglas",
+      freezeOn: `El regalo se congela después de ${MAX_STEALS} robos.`,
+      freezeOff: "Sin límite: cualquier regalo se puede robar en cualquier momento.",
+      stealBackOff: "No se vale robar de vuelta el regalo que te acaban de quitar.",
+      stealBackOn: "Se vale robar de vuelta enseguida.",
+      finalOn: "Al final, quien jugó primero tiene una última oportunidad de cambiar.",
+      finalOff: "El juego termina cuando se abre el último regalo.",
+      // Sem página em espanhol: a busca pela brincadeira com roubo é quase zero
+      // no México e na Espanha (Trends, 20/10/2026). Leva às regras em inglês.
+      more: "Reglas completas (en inglés) →",
+      moreUrl: "/",
+      promoTitle: "¿Vas a organizar el tuyo?",
+      promoBody: "App gratis: envía la invitación, sortea el orden y lleva la cuenta de cada robo. Sin registro.",
+      promoCta: "Descargar en Google Play",
+      errorTitle: "Esta invitación no se abrió",
+      errorBody: "Puede que el enlace se haya cortado al copiarlo. Pide a quien organiza que lo envíe de nuevo.",
+      icsFile: "white-elephant.ics",
+      pageTitle: "🎁 White Elephant",
+    },
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const set = (id, text) => { $(id).textContent = text; };
+
+  function browserLanguage() {
+    const lang = (navigator.language || "en").slice(0, 2).toLowerCase();
+    return STRINGS[lang] ? lang : "en";
+  }
+
+  const str = (v) => (typeof v === "string" ? v : "");
+  const bool = (v, fallback) => (typeof v === "boolean" ? v : fallback);
+
+  /** Espelho de InviteLink.encode: base64url → UTF-8 → JSON. */
+  function decode(token) {
+    let b64 = token.replace(/-/g, "+").replace(/_/g, "/");
+    while (b64.length % 4) b64 += "=";
+    const binary = atob(b64);
+    const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
+    const data = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+    if (data.v !== 1) throw new Error("versão desconhecida");
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(str(data.d)) ? data.d : "";
+    const time = /^\d{2}:\d{2}$/.test(str(data.t)) ? data.t : "";
+    return {
+      event: str(data.e).trim(),
+      date,
+      time: date ? time : "",
+      budget: str(data.b).trim(),
+      freeze: bool(data.f, true),
+      noStealBack: bool(data.n, true),
+      finalSwap: bool(data.s, true),
+      language: STRINGS[data.l] ? data.l : browserLanguage(),
+    };
+  }
+
+  function localize(lang) {
+    const t = STRINGS[lang];
+    document.documentElement.lang = t.locale === "en-US" ? "en" : t.locale;
+    document.title = t.pageTitle;
+    const promo = $("promo-link");
+    promo.href = PLAY_URL + "&hl=" + (lang === "pt" ? "pt_BR" : lang);
+    promo.textContent = t.promoCta;
+  }
+
+  /** Data local, sem fuso: o convite vale para quem está no mesmo lugar. */
+  function localDate(data) {
+    const [y, m, d] = data.date.split("-").map(Number);
+    const [hh, mm] = data.time ? data.time.split(":").map(Number) : [0, 0];
+    return new Date(y, m - 1, d, hh, mm);
+  }
+
+  const pad = (n) => String(n).padStart(2, "0");
+  const stamp = (dt) => `${dt.getFullYear()}${pad(dt.getMonth() + 1)}${pad(dt.getDate())}`;
+  const stampTime = (dt) => `${stamp(dt)}T${pad(dt.getHours())}${pad(dt.getMinutes())}00`;
+
+  /** Início e fim: com hora, 3 horas de festa; sem hora, o dia inteiro. */
+  function range(data) {
+    const start = localDate(data);
+    if (!data.time) {
+      const next = new Date(start); next.setDate(next.getDate() + 1);
+      return { allDay: true, start: stamp(start), end: stamp(next) };
+    }
+    const end = new Date(start.getTime() + 3 * 60 * 60 * 1000);
+    return { allDay: false, start: stampTime(start), end: stampTime(end) };
+  }
+
+  function details(data, t) {
+    return [data.budget ? t.budget(data.budget) : "", location.href].filter(Boolean).join("\n");
+  }
+
+  function googleCalendarUrl(data, title, t) {
+    const r = range(data);
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: title,
+      dates: `${r.start}/${r.end}`,
+      details: details(data, t),
+    });
+    return "https://calendar.google.com/calendar/render?" + params.toString();
+  }
+
+  function icsEscape(s) {
+    return s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+  }
+
+  function downloadIcs(data, title, t) {
+    const r = range(data);
+    const now = new Date();
+    const utc = `${now.getUTCFullYear()}${pad(now.getUTCMonth() + 1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}${pad(now.getUTCSeconds())}Z`;
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//borzanti//whiteelephant//EN",
+      "BEGIN:VEVENT",
+      `UID:${utc}-${Math.random().toString(36).slice(2)}@whiteelephant.borzanti.com`,
+      `DTSTAMP:${utc}`,
+      r.allDay ? `DTSTART;VALUE=DATE:${r.start}` : `DTSTART:${r.start}`,
+      r.allDay ? `DTEND;VALUE=DATE:${r.end}` : `DTEND:${r.end}`,
+      `SUMMARY:${icsEscape(title)}`,
+      `DESCRIPTION:${icsEscape(details(data, t))}`,
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ];
+    const blob = new Blob([lines.join("\r\n") + "\r\n"], { type: "text/calendar;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = t.icsFile;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+
+  function addItems(listId, items) {
+    const list = $(listId);
+    for (const text of items) {
+      const li = document.createElement("li");
+      li.textContent = text;
+      list.appendChild(li);
+    }
+  }
+
+  function render(data) {
+    const t = STRINGS[data.language];
+    localize(data.language);
+    const title = data.event || t.defaultEvent;
+
+    set("eyebrow", t.eyebrow);
+    set("event", title);
+
+    if (data.date) {
+      const dt = localDate(data);
+      set("date", new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(dt));
+      if (data.time) {
+        set("time", new Intl.DateTimeFormat(t.locale, { hour: "numeric", minute: "2-digit" }).format(dt));
+        $("time").hidden = false;
+      }
+      $("when").hidden = false;
+
+      const gcal = $("gcal");
+      gcal.href = googleCalendarUrl(data, title, t);
+      gcal.textContent = t.gcal;
+      const ics = $("ics");
+      ics.textContent = t.ics;
+      ics.addEventListener("click", () => downloadIcs(data, title, t));
+      $("calendar").hidden = false;
+    }
+
+    if (data.budget) {
+      set("budget", t.budget(data.budget));
+      $("budget").hidden = false;
+    }
+
+    set("how-title", t.howTitle);
+    addItems("how", t.how);
+
+    set("rules-title", t.rulesTitle);
+    addItems("rules", [
+      data.freeze ? t.freezeOn : t.freezeOff,
+      data.noStealBack ? t.stealBackOff : t.stealBackOn,
+      data.finalSwap ? t.finalOn : t.finalOff,
+    ]);
+    const more = $("more");
+    more.href = t.moreUrl;
+    more.textContent = t.more;
+
+    set("promo-title", t.promoTitle);
+    set("promo-body", t.promoBody);
+    $("invite").hidden = false;
+  }
+
+  function showError() {
+    const lang = browserLanguage();
+    const t = STRINGS[lang];
+    localize(lang);
+    set("error-title", t.errorTitle);
+    set("error-body", t.errorBody);
+    const more = $("error-more");
+    more.href = t.moreUrl;
+    more.textContent = t.more;
+    $("error").hidden = false;
+  }
+
+  let data;
+  try {
+    const token = decodeURIComponent(location.hash.slice(1));
+    if (!token) throw new Error("sem token");
+    data = decode(token);
+  } catch (e) {
+    showError();
+    return;
+  }
+  render(data);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">White Elephant</string>
+
+    <string name="common_back">Back</string>
+    <string name="common_more">More options</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_ok">OK</string>
+
+    <string name="menu_privacy_options">Privacy options</string>
+    <string name="menu_privacy_policy">Privacy policy</string>
+    <string name="menu_language">Language</string>
+    <string name="language_system">System language</string>
+
+    <!-- Preparação: a festa e o convite -->
+    <string name="setup_party_title">The party</string>
+    <string name="setup_event_label">Party name (optional)</string>
+    <string name="setup_event_hint">e.g. Office holiday party</string>
+    <string name="setup_date">Date</string>
+    <string name="setup_time">Time</string>
+    <string name="setup_invite">Send the invite</string>
+    <string name="setup_invite_hint">One link for the group chat with the date, budget and tonight\'s rules — so nobody argues about stealing at the party.</string>
+
+    <string name="invite_default_event">White Elephant gift exchange</string>
+    <string name="invite_message">🎁 %1$s — %2$s. Budget, rules and how to play: %3$s</string>
+    <string name="invite_message_no_date">🎁 %1$s. Budget, rules and how to play: %2$s</string>
+    <string name="invite_chooser">Send the invite</string>
+    <string name="invite_whatsapp">WhatsApp</string>
+    <string name="invite_sms">Text message</string>
+    <string name="invite_copy">Copy invite</string>
+    <string name="invite_other">Other apps</string>
+    <string name="invite_copied">Invite copied — paste it in the group chat</string>
+
+    <!-- Preparação: na hora -->
+    <string name="setup_game_title">At the party</string>
+    <string name="setup_game_hint">Optional: add the players, draw the order, and the app keeps track of steals.</string>
+
+    <string name="setup_budget_label">Gift budget (optional)</string>
+    <string name="setup_budget_hint">e.g. $25</string>
+    <string name="setup_change_rules">Change rules</string>
+    <string name="setup_rules_default">Classic rules</string>
+    <string name="setup_rules_custom">Custom rules for tonight</string>
+    <string name="setup_rules_reset">Back to classic rules</string>
+    <plurals name="setup_players">
+        <item quantity="one">%1$d player</item>
+        <item quantity="other">%1$d players</item>
+    </plurals>
+    <string name="setup_players_empty">Players</string>
+    <string name="setup_add_hint">Add a name, or paste a whole list</string>
+    <string name="setup_add_supporting">Separate names with commas or put one per line</string>
+    <string name="setup_add">Add</string>
+    <string name="setup_remove">Remove %1$s</string>
+    <string name="setup_needs_more">Add at least %1$d players to start.</string>
+    <string name="setup_draw_order">Draw the order</string>
+    <string name="setup_resume">Game in progress — tap to continue</string>
+    <string name="setup_last_results">Last game — see who took what</string>
+    <string name="setup_resume_progress">%1$d of %2$d gifts opened</string>
+
+    <!-- As três regras variáveis -->
+    <string name="rule_freeze">Gifts freeze after %1$d steals</string>
+    <string name="rule_freeze_body">The third person to steal a gift keeps it for good.</string>
+    <string name="rule_no_steal_back">No stealing back right away</string>
+    <string name="rule_no_steal_back_body">A gift stolen this round can\'t be stolen again until someone opens a new one.</string>
+    <string name="rule_final_swap">First player gets a final swap</string>
+    <string name="rule_final_swap_body">At the end, whoever opened first may trade with anyone. Makes going first fair.</string>
+
+    <!-- Ordem -->
+    <string name="order_suspense">Drawing the order…</string>
+    <string name="order_title">Order of play</string>
+    <string name="order_start">Start — %1$s goes first</string>
+    <string name="order_last_is_best">%1$s goes last — the best spot: they get to see every gift before choosing.</string>
+
+    <!-- Partida -->
+    <string name="play_round">Gift %1$d of %2$d</string>
+    <string name="play_final_swap_title">Final swap</string>
+    <string name="play_undo">Undo</string>
+    <string name="play_turn_label">YOUR TURN</string>
+    <string name="play_turn_hint">Open a new gift, or steal one below.</string>
+    <string name="play_stolen_label">YOUR GIFT WAS STOLEN</string>
+    <string name="play_stolen_hint">Open a new gift, or steal another one.</string>
+    <string name="play_final_swap_label">LAST CHANCE</string>
+    <string name="play_final_swap_hint">Swap your gift with anyone\'s, or keep it.</string>
+    <string name="play_next_up">Next up: %1$s</string>
+    <string name="play_budget">Budget: %1$s</string>
+    <string name="play_open">Open a new gift</string>
+    <string name="play_keep">Keep my gift</string>
+    <string name="play_gifts_opened">Opened gifts</string>
+    <string name="play_with">with %1$s</string>
+    <string name="play_steal">Steal</string>
+    <string name="play_swap">Swap</string>
+    <string name="play_frozen">Frozen</string>
+    <string name="play_stolen_this_round">Just stolen</string>
+    <string name="play_steals">Stolen %1$d×</string>
+    <string name="play_discard">End this game</string>
+    <string name="play_discard_title">End this game?</string>
+    <string name="play_discard_body">The gifts opened so far will be forgotten. The list of players stays.</string>
+
+    <string name="gift_untitled">Gift #%1$d</string>
+
+
+    <!-- Resumo -->
+    <string name="summary_title">Who\'s taking what home</string>
+    <string name="summary_most_wanted">MOST WANTED</string>
+    <string name="summary_most_wanted_body">Stolen %1$d× — %2$s took it home.</string>
+    <string name="summary_totals">Gifts: %1$d · Steals: %2$d</string>
+    <string name="summary_done">Done</string>
+    <string name="summary_play_again">Play again with a new order</string>
+
+    <!-- Regras -->
+    <string name="rules_title">How to play</string>
+    <string name="rules_tonight">Tonight\'s rules</string>
+    <string name="rules_tonight_freeze_on">A gift freezes after %1$d steals.</string>
+    <string name="rules_tonight_freeze_off">No steal limit: any gift can always be stolen.</string>
+    <string name="rules_tonight_steal_back_off">No stealing back a gift that was just stolen.</string>
+    <string name="rules_tonight_steal_back_on">Stealing back right away is allowed.</string>
+    <string name="rules_tonight_final_on">The first player gets a final swap.</string>
+    <string name="rules_tonight_final_off">No final swap: the game ends with the last gift.</string>
+    <string name="rules_bring_title">Before the party</string>
+    <string name="rules_bring_body">Everyone brings one wrapped gift within the budget. Gag gifts are part of the fun. All gifts go in a pile in the middle.</string>
+    <string name="rules_order_title">The order</string>
+    <string name="rules_order_body">The app draws a random order. Going last is the best spot: by then every gift is on the table.</string>
+    <string name="rules_turn_title">On your turn</string>
+    <string name="rules_turn_body">Either open a wrapped gift from the pile, or steal a gift someone already opened. Your turn ends when you open a gift.</string>
+    <string name="rules_stolen_title">When your gift is stolen</string>
+    <string name="rules_stolen_body">You go again right away: open a new gift or steal a different one. The round keeps going until someone opens a gift from the pile.</string>
+    <string name="rules_names_title">Dirty Santa, Yankee Swap…</string>
+    <string name="rules_names_body">Same game, different names. Some groups also call it Grinch exchange, Thieving Secret Santa or Chinese gift exchange.</string>
+</resources>

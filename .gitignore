@@ -1,0 +1,20 @@
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.keystore
+!debug.keystore
+
+# Assinatura de release: nunca versionar
+*.jks
+keystore.properties
+
+# Cache do compilador Kotlin
+.kotlin/

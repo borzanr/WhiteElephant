@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy Policy — White Elephant</title>
+<meta name="theme-color" content="#140E20">
+<!--
+  Adaptada da política do Amigo Secreto. O que muda: não há links secretos;
+  o que sai do aparelho é o convite (nome da festa, data, hora, valor e regras),
+  e a página do convite oferece o botão do Google Agenda, que só envia dados se
+  a pessoa tocar nele.
+-->
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #140E20; --surface: #1E1630; --surface-2: #2A2042; --line: #3D3157;
+    --gold: #E0B354; --bottle: #5FC48A; --text: #F2E8D5; --text-soft: #A99BC0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ink); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--bottle); }
+  .wrap { max-width: 720px; margin: 0 auto; padding: max(20px, env(safe-area-inset-top)) 16px max(40px, env(safe-area-inset-bottom)); }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+  .langs { display: flex; gap: 4px; }
+  .langs a {
+    border: 1px solid var(--line); color: var(--text-soft); border-radius: 999px; padding: 6px 12px;
+    text-decoration: none; font-size: 14px; min-height: 36px; display: inline-flex; align-items: center;
+  }
+  .langs a[aria-current="true"] { background: var(--surface-2); color: var(--text); border-color: var(--text-soft); }
+  h1 { font-size: clamp(28px, 6vw, 38px); line-height: 1.15; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 36px 0 8px; }
+  h2 .n { color: var(--gold); font-size: 14px; margin-right: 8px; letter-spacing: .06em; }
+  p, li { color: var(--text-soft); }
+  strong { color: var(--text); }
+  code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-size: .92em; color: var(--text); }
+  .meta { color: var(--text-soft); font-size: 14px; margin: 0 0 24px; }
+  .summary { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 24px 0; }
+  @media (min-width: 620px) { .summary { grid-template-columns: repeat(3, 1fr); } }
+  .summary div { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+  .summary h3 { margin: 0 0 6px; font-size: 15px; color: var(--text); }
+  .summary ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .summary p { margin: 8px 0 0; font-size: 13px; }
+  article[hidden] { display: none; }
+  footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--text-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="home" href="../">🎁 White Elephant</a>
+    <nav class="langs" aria-label="Language">
+      <a href="#en" data-lang="en">EN</a>
+      <a href="#pt" data-lang="pt">PT</a>
+    </nav>
+  </div>
+
+  <!-- ===================================================== ENGLISH -->
+  <article id="en" lang="en">
+    <h1>Privacy Policy</h1>
+    <p class="meta">White Elephant (<code>com.borzanti.whiteelephant</code>) · Effective October 20, 2026</p>
+
+    <p>White Elephant helps you invite a group to a gift exchange and run the game at the party. There is no account and no login, and we run no server that receives what you type. What leaves your device is only what you choose to share, and what is needed to show the ads that keep the app free.</p>
+
+    <div class="summary">
+      <div><h3>Stays on your device</h3><ul><li>Party name, date, time and budget</li><li>Players' names</li><li>Rules and the game in progress</li></ul><p>Never sent to us.</p></div>
+      <div><h3>Leaves only if you share</h3><ul><li>The invite link, containing the party name, date, time, budget and rules — no players' names</li></ul><p>Sent through the messaging app you pick.</p></div>
+      <div><h3>Collected by Google AdMob</h3><ul><li>Advertising ID</li><li>IP address, approximate country</li><li>Device model, OS, language</li><li>Ad views and clicks</li></ul><p>To serve and measure ads.</p></div>
+    </div>
+
+    <h2><span class="n">01</span>Who is responsible</h2>
+    <p>This app is developed by <strong>RAFAEL BORZAN CONSULTORIA EM TECNOLOGIA DA INFORMACAO LTDA</strong>, the data controller for the app. Privacy contact: <a href="mailto:admin@borzanti.com">admin@borzanti.com</a>.</p>
+
+    <h2><span class="n">02</span>Data we collect</h2>
+    <p><strong>None.</strong> We do not ask for your name, email, phone number, contacts or location, and we keep no user database. The game runs on your device and works offline.</p>
+
+    <h2><span class="n">03</span>Other people's names</h2>
+    <p>To run the game at the party you may type in the names of the players. They are stored only on your device and are never included in the invite link.</p>
+
+    <h2><span class="n">04</span>What is stored on your device</h2>
+    <ul>
+      <li><strong>The party</strong> — party name, date, time, budget, rules and players' names, so the screen is ready when you come back.</li>
+      <li><strong>The game</strong> — the order of play, who holds which gift and how many times each was stolen, saved after every move so a locked screen doesn't lose the game.</li>
+      <li><strong>Counters</strong> — how many games were finished, used to limit how often full-screen ads appear and when to ask for a rating.</li>
+    </ul>
+    <p>This is kept in the app's private storage. Uninstalling the app removes it.</p>
+
+    <h2><span class="n">05</span>Invite links</h2>
+    <p>When you send the invite, the party details travel <strong>inside the link itself</strong>, after the <code>#</code> sign. Browsers never send that part of a link to a server, so when the link is opened the page at <code>whiteelephant.borzanti.com</code> receives only a request for the page, and reads the details on the guest's own device.</p>
+    <p>The link is not encrypted: anyone who has it can read the party details. The messaging app you use to send it (for example WhatsApp) handles the message under its own privacy policy.</p>
+    <p>On the invite page, the <strong>Add to Google Calendar</strong> button sends the party name, date, time and budget to Google, and only if the guest taps it, under the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>. The <strong>Other calendar</strong> button creates the calendar file on the guest's device without sending anything.</p>
+    <p>The website is hosted on GitHub Pages. Like any web host, GitHub may log technical request data such as IP address and browser type when a page loads; it does not receive the part of the link that contains the party details. The pages load no analytics, fonts or third-party scripts.</p>
+
+    <h2><span class="n">06</span>Ads</h2>
+    <p>The app is free and shows ads from <strong>Google AdMob</strong>. To select, show and measure them, Google's SDK may collect the Android advertising ID, IP address, device information and ad interactions, under the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a> and <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses data from partner apps</a>. We receive only aggregated reports.</p>
+    <p>You can reset or delete your advertising ID, or turn off ad personalization, in your Android settings under <strong>Google → Ads</strong>.</p>
+
+    <h2><span class="n">07</span>Permissions</h2>
+    <ul>
+      <li><strong>Internet and network state</strong> — to load ads. The game works offline.</li>
+      <li><strong>Advertising ID</strong> — required by the AdMob SDK.</li>
+    </ul>
+    <p>The app does not access your camera, microphone, contacts, location, photos or files.</p>
+
+    <h2><span class="n">08</span>Children</h2>
+    <p>The app is not directed at children under 13 and does not knowingly collect their data. If you believe a child has given us data, contact us and it will be removed.</p>
+
+    <h2><span class="n">09</span>Your rights</h2>
+    <p>Under the Brazilian LGPD, GDPR and similar laws you may request access, correction, deletion and other rights over your data. Since we keep nothing on servers, most of this is done on your device — editing the party, resetting the advertising ID, or uninstalling. For anything else, write to <a href="mailto:admin@borzanti.com">admin@borzanti.com</a>; we reply within 15 days.</p>
+    <p>You also have the right to lodge a complaint with a data protection authority: in Brazil, the ANPD; in the European Economic Area, the authority of the country where you live; in the UK, the ICO.</p>
+
+    <h2><span class="n">10</span>Outside Brazil</h2>
+    <p><strong>EEA, UK and Switzerland:</strong> your consent for personalized ads is requested before any ad is shown, through Google's consent platform, and can be changed at any time from the app's menu. Personalized ads are shown only with that consent; non-personalized ads rely on Google's legitimate interest in serving and measuring ads, as described in Google's policies. <strong>International transfers:</strong> Google and GitHub may process data outside your country, including in the United States, under the safeguards in their own policies, such as the European Commission's standard contractual clauses. <strong>California:</strong> we do not sell personal information; sharing with Google as described above exists only to serve ads.</p>
+
+    <h2><span class="n">11</span>Changes</h2>
+    <p>If the app starts handling data differently, this page will be updated with a new effective date.</p>
+
+    <footer>RAFAEL BORZAN CONSULTORIA EM TECNOLOGIA DA INFORMACAO LTDA · <a href="mailto:admin@borzanti.com">admin@borzanti.com</a> · Last updated October 20, 2026</footer>
+  </article>
+
+  <!-- ===================================================== PORTUGUÊS -->
+  <article id="pt" lang="pt-BR" hidden>
+    <h1>Política de Privacidade</h1>
+    <p class="meta">Amigo Ladrão (<code>com.borzanti.whiteelephant</code>) · Vigência: 20 de outubro de 2026</p>
+
+    <p>O app ajuda a convidar o grupo para um amigo ladrão e a conduzir a brincadeira na festa. Não tem cadastro nem login, e não temos servidor que receba o que você digita. Só sai do seu aparelho o que você decide compartilhar e o necessário para exibir os anúncios que mantêm o app gratuito.</p>
+
+    <div class="summary">
+      <div><h3>Fica no seu aparelho</h3><ul><li>Nome da festa, data, hora e valor</li><li>Nomes de quem joga</li><li>Regras e a partida em andamento</li></ul><p>Nunca é enviado para nós.</p></div>
+      <div><h3>Só sai se você compartilhar</h3><ul><li>O link do convite, com nome da festa, data, hora, valor e regras — sem os nomes de quem joga</li></ul><p>Enviado pelo app de mensagens que você escolher.</p></div>
+      <div><h3>Coletado pelo Google AdMob</h3><ul><li>Identificador de publicidade</li><li>Endereço IP e país aproximado</li><li>Modelo, sistema e idioma</li><li>Exibições e cliques em anúncios</li></ul><p>Para exibir e medir anúncios.</p></div>
+    </div>
+
+    <h2><span class="n">01</span>Quem é o responsável</h2>
+    <p>Este app é desenvolvido por <strong>RAFAEL BORZAN CONSULTORIA EM TECNOLOGIA DA INFORMACAO LTDA</strong>, controladora dos dados tratados no contexto do app, nos termos da LGPD (Lei nº 13.709/2018). Contato: <a href="mailto:admin@borzanti.com">admin@borzanti.com</a>.</p>
+
+    <h2><span class="n">02</span>Dados que coletamos</h2>
+    <p><strong>Nenhum.</strong> Não pedimos nome, e-mail, telefone, contatos nem localização, e não mantemos banco de dados de usuários. A brincadeira roda no aparelho e funciona sem internet.</p>
+
+    <h2><span class="n">03</span>Nomes de outras pessoas</h2>
+    <p>Para conduzir a brincadeira na festa você pode digitar o nome de quem joga. Esses nomes ficam só no seu aparelho e nunca entram no link do convite.</p>
+
+    <h2><span class="n">04</span>O que fica guardado no aparelho</h2>
+    <ul>
+      <li><strong>A festa</strong> — nome, data, hora, valor, regras e nomes de quem joga, para a tela estar pronta quando você voltar.</li>
+      <li><strong>A partida</strong> — a ordem, quem está com qual presente e quantas vezes cada um foi roubado, salvos a cada jogada para a tela apagada não perder a partida.</li>
+      <li><strong>Contadores</strong> — quantas partidas terminaram, usado para limitar anúncios de tela cheia e decidir quando pedir avaliação.</li>
+    </ul>
+    <p>Tudo fica na área privada do app. Desinstalar o app apaga esses dados.</p>
+
+    <h2><span class="n">05</span>Links de convite</h2>
+    <p>Quando você envia o convite, os dados da festa viajam <strong>dentro do próprio link</strong>, depois do sinal <code>#</code>. Navegadores nunca enviam essa parte do link a um servidor: ao abrir, a página em <code>whiteelephant.borzanti.com</code> recebe só o pedido da página, e lê os dados no aparelho de quem abriu.</p>
+    <p>O link não é criptografado: quem tiver o link consegue ler os dados da festa. O app de mensagens que você usar (por exemplo, o WhatsApp) trata a mensagem conforme a política de privacidade dele.</p>
+    <p>Na página do convite, o botão <strong>Adicionar ao Google Agenda</strong> envia nome da festa, data, hora e valor ao Google, e só se a pessoa convidada tocar nele, conforme a <a href="https://policies.google.com/privacy?hl=pt-BR" rel="noopener">Política de Privacidade do Google</a>. O botão <strong>Outra agenda</strong> cria o arquivo de agenda no próprio aparelho, sem enviar nada.</p>
+    <p>O site é hospedado no GitHub Pages. Como qualquer hospedagem, o GitHub pode registrar dados técnicos da requisição, como IP e tipo de navegador, ao carregar uma página; ele não recebe a parte do link que contém os dados da festa. As páginas não carregam analytics, fontes nem scripts de terceiros.</p>
+
+    <h2><span class="n">06</span>Anúncios</h2>
+    <p>O app é gratuito e exibe anúncios do <strong>Google AdMob</strong>. Para selecionar, exibir e medir esses anúncios, o SDK do Google pode coletar o identificador de publicidade do Android, o endereço IP, informações do aparelho e interações com anúncios, conforme a <a href="https://policies.google.com/privacy?hl=pt-BR" rel="noopener">Política de Privacidade do Google</a> e <a href="https://policies.google.com/technologies/partner-sites?hl=pt-BR" rel="noopener">como o Google usa dados de apps parceiros</a>. Recebemos apenas relatórios agregados.</p>
+    <p>Você pode redefinir ou excluir o identificador de publicidade, ou desativar a personalização, em <strong>Configurações → Google → Anúncios</strong> no Android.</p>
+
+    <h2><span class="n">07</span>Permissões</h2>
+    <ul>
+      <li><strong>Internet e estado da rede</strong> — para carregar anúncios. A brincadeira funciona offline.</li>
+      <li><strong>Identificador de publicidade</strong> — exigido pelo SDK do AdMob.</li>
+    </ul>
+    <p>O app não acessa câmera, microfone, contatos, localização, fotos nem arquivos.</p>
+
+    <h2><span class="n">08</span>Crianças</h2>
+    <p>O app não é direcionado a menores de 13 anos e não coleta conscientemente dados dessa faixa etária. Se você acredita que uma criança nos forneceu algum dado, entre em contato para removê-lo.</p>
+
+    <h2><span class="n">09</span>Seus direitos</h2>
+    <p>A LGPD garante confirmação, acesso, correção, anonimização, eliminação, portabilidade e revogação de consentimento. Como não mantemos dados em servidores, a maior parte disso é feita no aparelho — editando a festa, redefinindo o identificador de publicidade ou desinstalando o app. Para outras solicitações, escreva para <a href="mailto:admin@borzanti.com">admin@borzanti.com</a>; respondemos em até 15 dias.</p>
+    <p>Você também pode apresentar reclamação a uma autoridade de proteção de dados: no Brasil, a ANPD; no Espaço Econômico Europeu, a autoridade do país onde você mora; no Reino Unido, o ICO.</p>
+
+    <h2><span class="n">10</span>Usuários fora do Brasil</h2>
+    <p><strong>Europa, Reino Unido e Suíça:</strong> o consentimento para anúncios personalizados é pedido antes de qualquer anúncio, pela plataforma de consentimento do Google, e pode ser alterado a qualquer momento pelo menu do app. Anúncios personalizados só aparecem com esse consentimento; anúncios não personalizados se baseiam no legítimo interesse do Google em exibir e medir anúncios, conforme as políticas do Google. <strong>Transferência internacional:</strong> Google e GitHub podem processar dados fora do seu país, inclusive nos Estados Unidos, com as salvaguardas das próprias políticas, como as cláusulas contratuais padrão da Comissão Europeia. <strong>Califórnia:</strong> não vendemos dados pessoais; o compartilhamento com o Google descrito acima existe só para exibir anúncios.</p>
+
+    <h2><span class="n">11</span>Mudanças</h2>
+    <p>Se o app passar a tratar dados de outra forma, esta página será atualizada com nova data de vigência.</p>
+
+    <footer>RAFAEL BORZAN CONSULTORIA EM TECNOLOGIA DA INFORMACAO LTDA · <a href="mailto:admin@borzanti.com">admin@borzanti.com</a> · Última atualização: 20 de outubro de 2026</footer>
+  </article>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  // Um idioma por vez. O inglês é o padrão no HTML; o fragmento (#pt) ou o
+  // idioma do navegador escolhem outro. Sem JS, só o inglês aparece.
+  const langs = ["en", "pt"];
+  function show(lang) {
+    langs.forEach((l) => { document.getElementById(l).hidden = l !== lang; });
+    document.querySelectorAll(".langs a").forEach((a) => a.setAttribute("aria-current", String(a.dataset.lang === lang)));
+    document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
+  }
+  function fromHash() {
+    const h = location.hash.slice(1);
+    if (langs.includes(h)) return h;
+    return (navigator.language || "en").toLowerCase().startsWith("pt") ? "pt" : "en";
+  }
+  window.addEventListener("hashchange", () => { show(fromHash()); window.scrollTo(0, 0); });
+  show(fromHash());
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<meta charset="utf-8">
+<!--
+  Captura 1080×1920 da ficha. Uso: shot.html?n=1..6&lang=pt|en|es
+  Os prints em shots-<lang>/ são capturas reais do Redmi (1080×2400). Cada tela
+  diz que faixa da captura aparece: corta a barra de status, a barra do Chrome
+  (convite), o banner de anúncio de teste (preparação e regras) e a barra de
+  navegação. Nenhuma captura da loja mostra anúncio.
+
+  Textos aprovados pelo Rafael em 21/10/2026.
+-->
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden; position: relative;
+    background: #140E20;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .glow-top {
+    position: absolute; left: 50%; top: -460px; transform: translateX(-50%);
+    width: 1300px; height: 1000px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(95,196,138,.26) 0%, rgba(124,91,199,.16) 45%, rgba(124,91,199,0) 70%);
+  }
+  .glow-bottom {
+    position: absolute; left: 50%; bottom: -560px; transform: translateX(-50%);
+    width: 1300px; height: 900px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(224,179,84,.16) 0%, rgba(224,179,84,0) 66%);
+  }
+  .bit { position: absolute; border-radius: 4px; }
+
+  header { position: relative; text-align: center; padding: 100px 70px 0; flex: none; }
+  h1 { font-size: 80px; font-weight: 800; letter-spacing: -2px; line-height: 1.06; color: #F2E8D5; margin: 0 0 22px; }
+  h1 em { font-style: normal; color: #E0B354; }
+  .sub { font-size: 36px; font-weight: 500; color: #A99BC0; margin: 0; line-height: 1.32; }
+
+  .phone {
+    position: relative; margin: auto 0; overflow: hidden;
+    border-radius: 44px; border: 9px solid #2E2446;
+    box-shadow: 0 0 0 2px rgba(224,179,84,.18), 0 40px 90px rgba(0,0,0,.6), 0 0 140px rgba(95,196,138,.18);
+    background: #140E20;
+  }
+  .phone img { display: block; position: absolute; left: 0; }
+</style>
+
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
+<div class="bit" style="left:46px; top:70px; width:34px; height:15px; background:#E0B354; transform:rotate(-24deg);"></div>
+<div class="bit" style="left:1004px; top:104px; width:28px; height:14px; background:#7C5BC7; transform:rotate(32deg);"></div>
+<div class="bit" style="left:58px; top:700px; width:22px; height:22px; border-radius:50%; background:#5FC48A; opacity:.7;"></div>
+<div class="bit" style="left:990px; top:980px; width:26px; height:13px; background:#F2E8D5; opacity:.8; transform:rotate(18deg);"></div>
+<div class="bit" style="left:64px; top:1560px; width:26px; height:13px; background:#E0B354; transform:rotate(-38deg);"></div>
+
+<header>
+  <h1 id="title"></h1>
+  <p class="sub" id="sub"></p>
+</header>
+
+<div class="phone" id="phone"><img id="shot" alt=""></div>
+
+<script>
+  // top/bottom: faixa da captura (1080×2400) que aparece dentro da moldura.
+  var CROPS = {
+    "01": { top: 262, bottom: 2262 },  // convite: abaixo da barra do Chrome
+    "02": { top: 105, bottom: 1925 },  // preparação: acima do "Anúncio de teste"
+    "03": { top: 105, bottom: 1925 },  // regras: idem
+    "04": { top: 105, bottom: 2262 },
+    "05": { top: 105, bottom: 2262 },
+    "06": { top: 105, bottom: 2262 }
+  };
+
+  var SLIDES = {
+    en: [
+      { t: "One <em>invite</em> for the group", s: "Date, budget and your rules. Guests open it in the browser, nothing to install." },
+      { t: "Set up the party <em>in a minute</em>", s: "Name, date, time and gift budget." },
+      { t: "Settle the <em>stealing rules</em> early", s: "Freeze after 3 steals, no stealing back, final swap." },
+      { t: "Draw <em>the order</em>", s: "Big enough for the whole room to see." },
+      { t: "Every steal, <em>tracked</em>", s: "One tap to open or steal. Frozen gifts lock themselves." },
+      { t: "Who took <em>what home</em>", s: "And the most wanted gift of the night." }
+    ],
+    pt: [
+      { t: "Um <em>convite</em> para o grupo", s: "Data, valor e as regras. Quem recebe abre no navegador, sem instalar nada." },
+      { t: "Organize a festa <em>em um minuto</em>", s: "Nome, data, hora e valor do presente." },
+      { t: "Combine as <em>regras de roubo</em> antes", s: "Congela no 3º roubo, sem roubar de volta, troca final." },
+      { t: "Sorteie <em>a ordem</em>", s: "Em letra grande, para a sala toda ver." },
+      { t: "Cada roubo, <em>anotado</em>", s: "Um toque para abrir ou roubar. Presente congelado trava sozinho." },
+      { t: "Quem levou <em>o quê</em>", s: "E o presente mais disputado da noite." }
+    ],
+    es: [
+      { t: "Una <em>invitación</em> para el grupo", s: "Fecha, monto y sus reglas. Se abre en el navegador, sin instalar nada." },
+      { t: "Organiza la fiesta <em>en un minuto</em>", s: "Nombre, fecha, hora y monto del regalo." },
+      { t: "Acuerden las <em>reglas de robo</em> antes", s: "Se congela al 3er robo, sin robar de vuelta, cambio final." },
+      { t: "Sortea <em>el orden</em>", s: "En letra grande, para que todos lo vean." },
+      { t: "Cada robo, <em>anotado</em>", s: "Un toque para abrir o robar. El regalo congelado se bloquea solo." },
+      { t: "Quién se llevó <em>qué</em>", s: "Y el regalo más disputado de la noche." }
+    ]
+  };
+
+  var params = new URLSearchParams(location.search);
+  var lang = SLIDES[params.get("lang")] ? params.get("lang") : "en";
+  var n = Math.min(6, Math.max(1, parseInt(params.get("n"), 10) || 1));
+  var slide = SLIDES[lang][n - 1];
+  var key = "0" + n;
+
+  document.getElementById("title").innerHTML = slide.t;
+  document.getElementById("sub").textContent = slide.s;
+
+  var crop = CROPS[key];
+  var header = document.querySelector("header").getBoundingClientRect();
+  var available = 1920 - header.bottom - 110;
+  var cropHeight = crop.bottom - crop.top;
+  var width = Math.min(720, Math.round(available * 1080 / cropHeight));
+  var scale = width / 1080;
+
+  var phone = document.getElementById("phone");
+  phone.style.width = width + "px";
+  phone.style.height = Math.round(cropHeight * scale) + "px";
+  var img = document.getElementById("shot");
+  img.src = "shots-" + lang + "/" + key + ".png";
+  img.style.width = width + "px";
+  img.style.top = -Math.round(crop.top * scale) + "px";
+</script>

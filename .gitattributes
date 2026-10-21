@@ -1,0 +1,16 @@
+# Normaliza fins de linha no repositório (LF), convertendo no checkout conforme o SO.
+* text=auto
+
+# Scripts shell precisam de LF em qualquer máquina, senão não executam em Linux/Mac/CI.
+gradlew   text eol=lf
+*.sh      text eol=lf
+
+# Scripts do Windows ficam com CRLF.
+*.bat     text eol=crlf
+
+# Binários: nunca converter.
+*.png     binary
+*.jpg     binary
+*.jar     binary
+*.aab     binary
+*.apk     binary

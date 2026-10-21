@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<!-- Gráfico de destaque 1024×500, um por idioma (?lang=en|pt|es). Textos aprovados em 21/10/2026. -->
+<style>
+  html, body { margin: 0; }
+  body { width: 1024px; height: 500px; overflow: hidden; position: relative;
+    background:
+      radial-gradient(60% 90% at 22% 55%, rgba(95,196,138,.22) 0%, rgba(124,91,199,.14) 45%, transparent 75%),
+      #140E20;
+    font-family: "Segoe UI", system-ui, Arial, sans-serif; }
+  .art { position: absolute; left: 40px; top: 10px; height: 480px; width: auto;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,.45)); }
+  .copy { position: absolute; left: 500px; right: 50px; top: 0; bottom: 0;
+    display: flex; flex-direction: column; justify-content: center; }
+  h1 { margin: 0 0 22px; color: #F2E8D5; font-size: 54px; line-height: 1.05; font-weight: 800; letter-spacing: -1px; }
+  p { margin: 0; color: #E0B354; font-size: 40px; line-height: 1.2; font-weight: 700; }
+</style>
+<img class="art" src="../art/feature-art.png" alt="">
+<div class="copy"><h1 id="t"></h1><p id="s"></p></div>
+<script>
+  var T = {
+    en: { t: "White Elephant &amp; Dirty Santa", s: "Invite. Draw. Steal." },
+    pt: { t: "Amigo Ladrão: Rouba Presente", s: "Convide. Sorteie. Roube." },
+    es: { t: "White Elephant: Roba Regalos", s: "Invita. Sortea. Roba." }
+  };
+  var params = new URLSearchParams(location.search);
+  var t = T[params.get("lang")] || T.en;
+  // ?art=caminho permite comparar candidatas sem mexer no arquivo.
+  if (params.get("art")) document.querySelector(".art").src = params.get("art");
+  document.getElementById("t").innerHTML = t.t;
+  document.getElementById("s").textContent = t.s;
+</script>
