@@ -25,7 +25,6 @@
     <string name="invite_message">🎁 %1$s — %2$s. Valor, regras e como funciona: %3$s</string>
     <string name="invite_message_no_date">🎁 %1$s. Valor, regras e como funciona: %2$s</string>
     <string name="invite_chooser">Enviar convite</string>
-    <string name="invite_whatsapp">WhatsApp</string>
     <string name="invite_sms">SMS</string>
     <string name="invite_copy">Copiar convite</string>
     <string name="invite_other">Outros apps</string>

@@ -24,21 +24,39 @@ import java.util.Locale
  * direto sem nome — e de dentro do app não há como saber que ele caiu. Os canais
  * diretos e o "copiar" funcionam mesmo com o seletor quebrado.
  */
-enum class InviteChannel { WHATSAPP, SMS, COPY, OTHER }
-
-private val WHATSAPP_PACKAGES = listOf("com.whatsapp", "com.whatsapp.w4b")
-
-/** Pacote do WhatsApp instalado (comum ou Business), ou `null`. */
-fun Context.whatsAppPackage(): String? = WHATSAPP_PACKAGES.firstOrNull { pkg ->
-    runCatching {
-        if (Build.VERSION.SDK_INT >= 33) {
-            packageManager.getPackageInfo(pkg, PackageManager.PackageInfoFlags.of(0))
-        } else {
-            @Suppress("DEPRECATION")
-            packageManager.getPackageInfo(pkg, 0)
-        }
-    }.isSuccess
+enum class InviteChannel(val packageName: String? = null) {
+    WHATSAPP("com.whatsapp"),
+    WHATSAPP_BUSINESS("com.whatsapp.w4b"),
+    MESSENGER("com.facebook.orca"),
+    TELEGRAM("org.telegram.messenger"),
+    SIGNAL("org.thoughtcrime.securesms"),
+    SMS,
+    COPY,
+    OTHER,
 }
+
+/** Mensageiros com app próprio, na ordem em que aparecem na folha. */
+private val MESSENGERS = InviteChannel.entries.filter { it.packageName != null }
+
+/**
+ * Mensageiros populares no mundo que estão instalados. Cada um vira uma opção
+ * própria na folha, e só aparece se estiver no aparelho: assim o americano vê
+ * Messenger e SMS, o brasileiro vê WhatsApp, e ninguém vê opção de app que não
+ * usa. Com WhatsApp e Business juntos, os dois aparecem para a pessoa escolher.
+ * Instagram fica de fora: ele não recebe texto compartilhado.
+ */
+fun Context.installedMessengers(): List<InviteChannel> =
+    MESSENGERS.filter { channel ->
+        runCatching {
+            val pkg = channel.packageName!!
+            if (Build.VERSION.SDK_INT >= 33) {
+                packageManager.getPackageInfo(pkg, PackageManager.PackageInfoFlags.of(0))
+            } else {
+                @Suppress("DEPRECATION")
+                packageManager.getPackageInfo(pkg, 0)
+            }
+        }.isSuccess
+    }
 
 /**
  * Envia o convite pelo canal escolhido.
@@ -49,14 +67,9 @@ fun Context.whatsAppPackage(): String? = WHATSAPP_PACKAGES.firstOrNull { pkg ->
 fun Context.sendInvite(channel: InviteChannel, setup: Setup, url: String): Boolean {
     val message = inviteMessage(setup, url)
     return when (channel) {
-        InviteChannel.WHATSAPP -> {
-            val pkg = whatsAppPackage()
-            if (pkg == null) {
-                openChooser(message)
-            } else {
-                tryStart(sendIntent(message).setPackage(pkg)) || openChooser(message)
-            }
-        }
+        InviteChannel.WHATSAPP, InviteChannel.WHATSAPP_BUSINESS, InviteChannel.MESSENGER,
+        InviteChannel.TELEGRAM, InviteChannel.SIGNAL ->
+            tryStart(sendIntent(message).setPackage(channel.packageName)) || openChooser(message)
 
         InviteChannel.SMS -> tryStart(
             Intent(Intent.ACTION_SENDTO, "smsto:".toUri()).putExtra("sms_body", message),

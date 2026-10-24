@@ -9,7 +9,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Chat
 import androidx.compose.material.icons.automirrored.outlined.Send
 import androidx.compose.material.icons.outlined.ContentCopy
+import androidx.compose.material.icons.outlined.Forum
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Sms
+import androidx.compose.material.icons.outlined.Storefront
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -33,7 +36,7 @@ import com.whiteelephant.app.share.InviteChannel
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InviteSheet(hasWhatsApp: Boolean, onDismiss: () -> Unit, onPick: (InviteChannel) -> Unit) {
+fun InviteSheet(messengers: List<InviteChannel>, onDismiss: () -> Unit, onPick: (InviteChannel) -> Unit) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
@@ -45,10 +48,18 @@ fun InviteSheet(hasWhatsApp: Boolean, onDismiss: () -> Unit, onPick: (InviteChan
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
             )
-            if (hasWhatsApp) {
-                Option(Icons.AutoMirrored.Outlined.Chat, stringResource(R.string.invite_whatsapp)) {
-                    onPick(InviteChannel.WHATSAPP)
+            // Só os instalados (ver installedMessengers). Nomes de produto não se
+            // traduzem, por isso ficam aqui e não nos strings.xml.
+            messengers.forEach { channel ->
+                val (icon, name) = when (channel) {
+                    InviteChannel.WHATSAPP -> Icons.AutoMirrored.Outlined.Chat to "WhatsApp"
+                    InviteChannel.WHATSAPP_BUSINESS -> Icons.Outlined.Storefront to "WhatsApp Business"
+                    InviteChannel.MESSENGER -> Icons.Outlined.Forum to "Messenger"
+                    InviteChannel.TELEGRAM -> Icons.AutoMirrored.Outlined.Send to "Telegram"
+                    InviteChannel.SIGNAL -> Icons.Outlined.Lock to "Signal"
+                    else -> return@forEach
                 }
+                Option(icon, name) { onPick(channel) }
             }
             Option(Icons.Outlined.Sms, stringResource(R.string.invite_sms)) { onPick(InviteChannel.SMS) }
             Option(Icons.Outlined.ContentCopy, stringResource(R.string.invite_copy)) { onPick(InviteChannel.COPY) }

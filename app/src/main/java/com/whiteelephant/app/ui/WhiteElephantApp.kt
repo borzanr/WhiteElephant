@@ -27,7 +27,7 @@ import com.whiteelephant.app.ads.InterstitialManager
 import com.whiteelephant.app.game.Rules
 import com.whiteelephant.app.share.InviteLink
 import com.whiteelephant.app.share.sendInvite
-import com.whiteelephant.app.share.whatsAppPackage
+import com.whiteelephant.app.share.installedMessengers
 import com.whiteelephant.app.ui.components.SuspenseOverlay
 import com.whiteelephant.app.ui.order.OrderScreen
 import com.whiteelephant.app.ui.play.PlayScreen
@@ -55,7 +55,7 @@ fun WhiteElephantApp(viewModel: WhiteElephantViewModel = viewModel()) {
     val drawing by viewModel.drawing.collectAsStateWithLifecycle()
     val privacyOptionsRequired by ConsentManager.privacyOptionsRequired.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    val hasWhatsApp = remember { context.whatsAppPackage() != null }
+    val messengers = remember { context.installedMessengers() }
     // O convite e a política abrem no idioma em que o app está.
     val pageLanguage = InviteLink.pageLanguage(LocalConfiguration.current.locales[0].toLanguageTag())
 
@@ -101,7 +101,7 @@ fun WhiteElephantApp(viewModel: WhiteElephantViewModel = viewModel()) {
                 onTimeChange = viewModel::setTime,
                 onBudgetChange = viewModel::setBudget,
                 onRulesChange = viewModel::setRules,
-                hasWhatsApp = hasWhatsApp,
+                messengers = messengers,
                 onSendInvite = { channel ->
                     val left = context.sendInvite(channel, loaded, InviteLink.url(loaded, pageLanguage))
                     // Só espera a volta se outro app abriu; "copiar" fica aqui.

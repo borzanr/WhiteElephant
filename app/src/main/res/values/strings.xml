@@ -25,7 +25,6 @@
     <string name="invite_message">🎁 %1$s — %2$s. Budget, rules and how to play: %3$s</string>
     <string name="invite_message_no_date">🎁 %1$s. Budget, rules and how to play: %2$s</string>
     <string name="invite_chooser">Send the invite</string>
-    <string name="invite_whatsapp">WhatsApp</string>
     <string name="invite_sms">Text message</string>
     <string name="invite_copy">Copy invite</string>
     <string name="invite_other">Other apps</string>

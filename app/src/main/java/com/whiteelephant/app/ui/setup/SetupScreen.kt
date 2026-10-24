@@ -4,6 +4,12 @@ import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.focus.onFocusEvent
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -13,6 +19,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -107,7 +115,7 @@ fun SetupScreen(
     onTimeChange: (String) -> Unit,
     onBudgetChange: (String) -> Unit,
     onRulesChange: (Rules) -> Unit,
-    hasWhatsApp: Boolean,
+    messengers: List<InviteChannel>,
     onSendInvite: (InviteChannel) -> Unit,
     onAddNames: (String) -> Unit,
     onRemoveName: (String) -> Unit,
@@ -135,9 +143,19 @@ fun SetupScreen(
     val focusManager = LocalFocusManager.current
     val doneClearsFocus = KeyboardActions(onDone = { focusManager.clearFocus() })
 
+    // Mantém o campo de nomes inteiro à vista acima do teclado. Sozinho, o Compose
+    // só garante o cursor, e o campo ficava cortado pela metade na beira do teclado.
+    val namesField = remember { BringIntoViewRequester() }
+    val scope = rememberCoroutineScope()
+    fun showNamesField(afterMillis: Long) {
+        scope.launch { delay(afterMillis); namesField.bringIntoView() }
+    }
+
     fun submit() {
         if (input.isNotBlank()) onAddNames(input)
         input = ""
+        // Espera o nome novo entrar na lista acima antes de rolar.
+        showNamesField(afterMillis = 150)
     }
 
     Scaffold(
@@ -193,6 +211,10 @@ fun SetupScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+                // Com edge-to-edge a janela não encolhe sozinha quando o teclado
+                // abre: sem isto o campo de nomes e a lista ficavam atrás dele.
+                .consumeWindowInsets(padding)
+                .imePadding()
                 // Tocar fora de um campo encerra a edição. Sem isto o cursor ficava
                 // piscando no valor mesmo depois de a pessoa seguir para as regras.
                 .pointerInput(Unit) { detectTapGestures { focusManager.clearFocus() } },
@@ -313,31 +335,10 @@ fun SetupScreen(
                 )
             }
 
-            item {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    OutlinedTextField(
-                        value = input,
-                        onValueChange = { input = it },
-                        label = { Text(stringResource(R.string.setup_add_hint)) },
-                        supportingText = { Text(stringResource(R.string.setup_add_supporting)) },
-                        // Várias linhas para aceitar a lista colada do WhatsApp;
-                        // o Enter do teclado ainda adiciona.
-                        maxLines = 4,
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                        keyboardActions = KeyboardActions(onDone = { submit() }),
-                        modifier = Modifier.weight(1f),
-                    )
-                    FilledTonalIconButton(
-                        onClick = ::submit,
-                        enabled = input.isNotBlank(),
-                        modifier = Modifier.padding(start = 8.dp),
-                    ) {
-                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.setup_add))
-                    }
-                }
-            }
-
-            items(setup.names, key = { it }) { name ->
+            // Os nomes vêm antes do campo: com o teclado aberto o campo fica no pé
+            // da tela visível, e a lista que acabou de crescer aparece logo acima
+            // dele. Embaixo do campo ela ficava escondida atrás do teclado.
+            items(setup.names, key = { "name:$it" }) { name ->
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -351,6 +352,39 @@ fun SetupScreen(
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
+                    }
+                }
+            }
+
+            // Chave fixa: sem ela a lista identifica o item pela posição, e cada nome
+            // adicionado acima empurrava o campo para outra posição, recriando-o —
+            // ele perdia o foco e o teclado fechava a cada ✓.
+            item(key = "names-input") {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.bringIntoViewRequester(namesField),
+                ) {
+                    OutlinedTextField(
+                        value = input,
+                        onValueChange = { input = it },
+                        label = { Text(stringResource(R.string.setup_add_hint)) },
+                        supportingText = { Text(stringResource(R.string.setup_add_supporting)) },
+                        // Várias linhas para aceitar a lista colada do WhatsApp;
+                        // o Enter do teclado ainda adiciona.
+                        maxLines = 4,
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(onDone = { submit() }),
+                        modifier = Modifier
+                            .weight(1f)
+                            // Espera o teclado terminar de subir antes de rolar.
+                            .onFocusEvent { if (it.isFocused) showNamesField(afterMillis = 350) },
+                    )
+                    FilledTonalIconButton(
+                        onClick = ::submit,
+                        enabled = input.isNotBlank(),
+                        modifier = Modifier.padding(start = 8.dp),
+                    ) {
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.setup_add))
                     }
                 }
             }
@@ -383,7 +417,7 @@ fun SetupScreen(
     }
     if (choosingChannel) {
         InviteSheet(
-            hasWhatsApp = hasWhatsApp,
+            messengers = messengers,
             onDismiss = { choosingChannel = false },
             onPick = { choosingChannel = false; onSendInvite(it) },
         )

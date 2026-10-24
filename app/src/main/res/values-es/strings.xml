@@ -33,7 +33,6 @@
     <string name="invite_message">🎁 %1$s — %2$s. Monto, reglas y cómo se juega: %3$s</string>
     <string name="invite_message_no_date">🎁 %1$s. Monto, reglas y cómo se juega: %2$s</string>
     <string name="invite_chooser">Enviar invitación</string>
-    <string name="invite_whatsapp">WhatsApp</string>
     <string name="invite_sms">SMS</string>
     <string name="invite_copy">Copiar invitación</string>
     <string name="invite_other">Otras apps</string>

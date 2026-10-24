@@ -3,10 +3,17 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Só para saber se o WhatsApp está instalado e mostrar o botão dele no convite. -->
+    <!--
+        Só para saber quais mensageiros estão instalados e mostrar o botão de cada
+        um no convite (share/ShareInvite.kt). Sem isto, do Android 11 em diante o
+        app não enxerga os pacotes e nenhum botão apareceria.
+    -->
     <queries>
         <package android:name="com.whatsapp" />
         <package android:name="com.whatsapp.w4b" />
+        <package android:name="com.facebook.orca" />
+        <package android:name="org.telegram.messenger" />
+        <package android:name="org.thoughtcrime.securesms" />
     </queries>
 
     <application
